@@ -28,7 +28,7 @@ describe('Article flow', () => {
 
     cy.contains('.nav-link', 'Home').click();
     cy.contains('.nav-link', 'Global Feed').click();
-    cy.get('.article-preview').should('contain.text', title);
+    cy.get('.article-preview').contains('h1', `Article title: ${title}`)
   });
 
 
@@ -38,9 +38,9 @@ describe('Article flow', () => {
     cy.contains('.nav-link', 'Global Feed').click();
     cy.get('.article-preview').contains('h1', `Article title: ${title}`).click();
 
-    cy.contains('button', 'Delete Article').type('{enter}');
+    cy.contains('button', 'Delete Article').click();
 
     cy.contains('.nav-link', 'Global Feed').click();
-    cy.get('h1').should('not.have.value', `Article title: ${title}`);
+    cy.contains('.nav-link', 'Global Feed').should('not.contain.text', `Article title: ${title}`);
   });
 });
